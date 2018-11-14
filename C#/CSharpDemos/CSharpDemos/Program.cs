@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CSharpDemos
@@ -11,7 +13,9 @@ namespace CSharpDemos
     {
         static void Main(string[] args)
         {
+
             #region Running Selection Sort
+            /*
             //RUNNING SELECTION SORT
             //create a test array
             int[] testList = { 13, 21, 1, 4, 90, 123, 18, 2, 6, 5 };
@@ -20,9 +24,27 @@ namespace CSharpDemos
 
             //sort the array
             SelectionSort(largeTestList);
+            */
+            #endregion
+
+            #region Run String interpolation
+            /*
+            StringInterpolation();
+            */
 
             #endregion
 
+            #region Run LINQ Query
+            /*
+            UsingLINQ();
+            */
+            #endregion
+
+            #region Run Async Methods
+
+            TestAsync().Wait();
+
+            #endregion
 
             //call a read line so we can see the output
             Console.WriteLine("Enter any key to continue...");
@@ -79,6 +101,98 @@ namespace CSharpDemos
 
             Console.WriteLine("Running Time of Method: {0}",watch.Elapsed);
         }
+        #endregion
+
+        #region Some things i like about C#
+
+        #region String Interpolation
+
+        static void StringInterpolation()
+        {
+            //the classic way of printing strings with values
+            Console.WriteLine("This is my String, It was made on " + DateTime.Now + " WOW!");
+
+            //using string interpolation 
+            String running = "Not Running";
+
+            if (Process.GetProcessesByName("chrome").Length != 0)
+            {
+                running = "Running";
+            }
+
+            Console.WriteLine("The current date is {0} and Chrome is: {1}", DateTime.Now, running);
+        }
+
+        #endregion
+
+
+        #region LINQ
+        static void UsingLINQ()
+        {
+            // Assume we have an array of strings.
+            string[] programmingLanguages =
+            {
+                "C#" , "Java" ,"Go" , "F#" , "Haskell", "Python"
+            };
+
+            // Build a query expression to find the items in the array
+            // that have an embedded #.
+            IEnumerable<string> subset = from l in programmingLanguages
+                                            where l.Contains("#")
+                                            orderby l
+                                            select l;
+
+            foreach (string s in subset)
+            {
+                Console.WriteLine("Item: {0}", s);
+            }
+
+        }
+        #endregion
+
+        #region ASYNC
+
+        //Runner method for our async methods
+        static async Task TestAsync()
+        {            
+            string message = await DoWorkAsync();
+            Console.WriteLine(DoWork());
+            Console.WriteLine(message);
+
+            await MultiAwaits();
+        }
+
+        //await multiple tasks
+        static async Task MultiAwaits()
+        {
+            await Task.Run(() => { Thread.Sleep(2_000); });
+            Console.WriteLine("Done with first task!");
+
+            await Task.Run(() => { Thread.Sleep(2_000); });
+            Console.WriteLine("Done with second task!");
+
+            await Task.Run(() => { Thread.Sleep(2_000); });
+            Console.WriteLine("Done with third task!");
+        }
+
+        //completely stops the the thread
+        static string DoWork()
+        {
+            Thread.Sleep(5000);
+            return "Done with work!";
+        }
+
+        //asynchronously stop the thread
+        static async Task<string> DoWorkAsync()
+        {
+            return await Task.Run(() =>
+            {
+                Thread.Sleep(5000);
+                return "Done with work!";
+            });
+        }
+        #endregion
+
 
         #endregion
 
