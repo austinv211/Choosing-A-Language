@@ -64,13 +64,13 @@ Measure-Command -Expression {Sort-WithSelectionSort($largeTestList)}
 
 #Some examples of easy IT tasks competed with powershell
 
-#stopping a service
+#stopping a process
 
-Get-Service -Name COSDLanSwitchService | Stop-Service
+Get-Process -Name chrome | Stop-Process
 
 #sending code to a remote computer
 
-Invoke-Command -ComputerName "HPS8883-W7" -ScriptBlock {Get-ChildItem "C:\Users"}
+Invoke-Command -ComputerName "HPS23856-W7" -ScriptBlock {Get-ChildItem "C:\Users"} | Where {$_.Name -eq "Public" }
 
 #with an example of some really cool stuff
 

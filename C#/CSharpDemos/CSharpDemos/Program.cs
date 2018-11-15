@@ -15,7 +15,7 @@ namespace CSharpDemos
         {
 
             #region Running Selection Sort
-            /*
+
             //RUNNING SELECTION SORT
             //create a test array
             int[] testList = { 13, 21, 1, 4, 90, 123, 18, 2, 6, 5 };
@@ -23,27 +23,24 @@ namespace CSharpDemos
             int[] largeTestList = GetNumbersList();
 
             //sort the array
+            
             SelectionSort(largeTestList);
-            */
+
             #endregion
 
             #region Run String interpolation
-            /*
-            StringInterpolation();
-            */
+
+            //StringInterpolation();
 
             #endregion
 
             #region Run LINQ Query
-            /*
-            UsingLINQ();
-            */
+
+            //UsingLINQ();
             #endregion
 
             #region Run Async Methods
-
-            TestAsync().Wait();
-
+            //TestAsync().Wait();
             #endregion
 
             //call a read line so we can see the output
@@ -196,6 +193,7 @@ namespace CSharpDemos
 
         #endregion
 
+        #region Get Numbers List
         static int[] GetNumbersList()
         {
             int[] array = new int[10000];
@@ -209,6 +207,7 @@ namespace CSharpDemos
 
             return array;
         }
+        #endregion
 
         #region Print Array Method
         static void PrintArray(string header, int[] array)
